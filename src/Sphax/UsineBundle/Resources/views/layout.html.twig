@@ -1,0 +1,18 @@
+{% extends '::base.html.twig' %}
+
+{% block titleSection %}Test avec Raphael JS{% endblock %}
+
+{% block stylesheet %}
+ 	{{ parent() }}
+    {% stylesheets '@SphaxSpriteBundle/Resources/public/less/*' filter='less, cssrewrite' %}
+    	<link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+	{% endstylesheets %}
+{% endblock %}
+
+{% block javascript %}
+ 	{{ parent() }}
+    {% javascripts '@SphaxUsineBundle/Resources/public/js/*' %}
+	    <script src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+{% endblock %}
+		

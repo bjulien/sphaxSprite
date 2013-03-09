@@ -1,0 +1,11 @@
+parameters:
+    sprite.class: Sphax\SpriteBundle\Services\SpriteService
+    sprite_conf.class: Sphax\SpriteBundle\SpriteConf\SpriteConf
+
+services:
+    sphax.sprite_conf:
+        class: %sprite_conf.class%
+        
+    sphax.sprite:
+        class: %sprite.class%
+        arguments: [@sphax.sprite_conf]
