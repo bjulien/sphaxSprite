@@ -15,5 +15,6 @@
     },
     "autoload": {   
         "psr-0": { "Sphax\\SpriteBundle": "" }
-    }
+    },
+    "target-dir": "Sphax/SpriteBundle"
 }
