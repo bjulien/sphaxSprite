@@ -1,4 +1,8 @@
 <?php
+
+namespace Sphax\SpriteBundle\Exception;
+
+
 /**
  * Définition d'une classe d'exception personnalisée
  */
