@@ -6,7 +6,7 @@ namespace Sphax\SpriteBundle\Exception;
 /**
  * Définition d'une classe d'exception personnalisée
  */
-class DirectoryException extends Exception
+class DirectoryException extends \Exception
 {
     // Redéfinition du constructeur pour rendre le message obligatoire
     public function __construct($message, $code = 0) {
