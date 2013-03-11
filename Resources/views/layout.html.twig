@@ -2,9 +2,3 @@
 
 {% block titleSection %}Gestion des Sprites{% endblock %}
 
- {% block stylesheet %}
- 	{{ parent() }}
-    {% stylesheets '@SphaxSpriteBundle/Resources/public/less/*' filter='less, cssrewrite' %}
-    	<link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
-	{% endstylesheets %}
-{% endblock %}
