@@ -59,7 +59,7 @@ class SpriteService implements SpriteServiceInterface
                 if (!$handle = fopen($fileSpriteConf, 'w')) {
                     throw new DirectoryException('Cannot open file'.$file, 1);
                 }
-                $filesystem->chmod($handle, 0664);
+                $filesystem->chmod($fileSpriteConf, 0664);
             } catch (DirectoryException $de) {
                 throw new DirectoryException('Sprite file config cannot be create', 1);
             }
