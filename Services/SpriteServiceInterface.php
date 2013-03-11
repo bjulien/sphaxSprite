@@ -24,5 +24,11 @@ interface SpriteServiceInterface
      * generation du sprite
      * 
      */
-    public function generateSpriteAction();
+    public function generateSprite();
+
+    /**
+     * generate only one sprite
+     * 
+     */
+    public function generateOneSprite();
 }
