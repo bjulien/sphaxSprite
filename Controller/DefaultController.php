@@ -115,7 +115,7 @@ class DefaultController extends Controller
         //explode name bundle
         $dirAsset = strtolower(substr($dirBundle, 0,-6));
 
-        $filesystem = new FileSprite();
+        $filesystem = new Filesystem();
         //delete dir from src ...
         $filesystem->remove($dirGlobal.'/src/'.$dirSite.'/'.$dirBundle.'/Resources/public/images/'.$dirDossierImage);
         $filesystem->remove($dirGlobal.'/src/'.$dirSite.'/'.$dirBundle.'/Resources/public/sprites/'.$dirDossierImage.'.css');
@@ -152,7 +152,7 @@ class DefaultController extends Controller
             //explode name bundle
             $dirAsset = strtolower(substr($dirBundle, 0,-6));
 
-            $filesystem = new FileSprite();
+            $filesystem = new Filesystem();
 
             foreach($_POST['deleteImage'] as $img) {
                  $filesystem->remove($dirGlobal.'/src/'.$dirSite.'/'.$dirBundle.'/Resources/public/images/'.$dirDossierImage.'/'.$img);
@@ -189,7 +189,7 @@ class DefaultController extends Controller
         }
 
         // copie des fichiers images dans le dossier web
-        $filesystem = new FileSprite();
+        $filesystem = new Filesystem();
         $exclude_list = array(".", "..", "sprite.conf");
         $trueFile = array_diff(scandir($dir), $exclude_list);
         
@@ -224,7 +224,7 @@ class DefaultController extends Controller
             }
         }
 
-        $filesystem = new FileSprite();
+        $filesystem = new Filesystem();
 
         $dirGlobal = dirname($this->get('kernel')->getRootDir());
         $dir = $dirGlobal.'/src/'.$this->getRequest()->query->get('site').'/'.$this->getRequest()->query->get('bundle').'/Resources/public/images/'.$this->getRequest()->query->get('dossierImage');

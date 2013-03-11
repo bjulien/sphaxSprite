@@ -42,7 +42,7 @@ class SpriteService implements SpriteServiceInterface
      */
     public function createSprite()
     {
-        $filesystem = new FileSprite();
+        $filesystem = new Filesystem();
         $listSprite = $this->spriteConf->getConfig();
         foreach ($listSprite as $key => $spriteInfo) {
             try {
@@ -72,7 +72,7 @@ class SpriteService implements SpriteServiceInterface
      */
     public function generateSprite() 
     {
-        $filesystem = new FileSprite();
+        $filesystem = new Filesystem();
 
         $listSprite = $this->spriteConf->getConfig();
         foreach ($listSprite as $key => $spriteInfo) {
@@ -105,7 +105,7 @@ class SpriteService implements SpriteServiceInterface
      */
     public function generateOneSprite() 
     {
-        $filesystem = new FileSprite();
+        $filesystem = new Filesystem();
 
         $listSprite = $this->spriteConf->getConfig();
         foreach ($listSprite as $key => $spriteInfo) {
