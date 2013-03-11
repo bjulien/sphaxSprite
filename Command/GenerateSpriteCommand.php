@@ -26,10 +26,10 @@ class GenerateSpriteCommand extends ContainerAwareCommand
             $output->writeln('<info>Starting generate sprite '.$oneOrAll.'</info>');
             $sprite = $this->getContainer()->get('sphax.sprite');
             $output->writeln('<info>Step 1 : create folder and sprite file configuration</info>');
-            $sprite->createOneSprite();
+            $sprite->createOneSprite($oneOrAll;
             $output->writeln('<comment>Step 1 : done</comment>');
             $output->writeln('<info>Step 2 : generate sprite</info>');
-            $sprite->generateOneSprite();
+            $sprite->generateOneSprite($oneOrAll);
             $output->writeln('<comment>Step 2 : done</comment>');
         } else {
             $output->writeln('<info>Starting generate sprite process</info>');
