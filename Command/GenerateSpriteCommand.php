@@ -26,7 +26,7 @@ class GenerateSpriteCommand extends ContainerAwareCommand
         $sprite->createSprite();
         $output->writeln('<comment>Step 1 : done</comment>');
         $output->writeln('<info>Step 2 : generate sprite</info>');
-        $sprite->generateSpriteAction();
+        $sprite->generateSprite();
         $output->writeln('<comment>Step 2 : done</comment>');
     }
 }

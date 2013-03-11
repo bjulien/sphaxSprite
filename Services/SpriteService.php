@@ -2,10 +2,10 @@
  
 namespace Sphax\SpriteBundle\Services;
 
-use Sphax\SpriteBundle\FileSprite\FileSprite;
 use Sphax\SpriteBundle\SpriteConf\SpriteConf;
 use Sphax\SpriteBundle\Exception\DirectoryException;
 use Sphax\SpriteBundle\Exception\SpriteException;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOException;
 
 
@@ -56,7 +56,10 @@ class SpriteService implements SpriteServiceInterface
             //create sprite config
             try {
                 $fileSpriteConf = $spriteInfo['sourceSpriteImage'].'sprite.conf';  
-                $handle = $filesystem->fopen($fileSpriteConf, 'w');
+                if (!$handle = fopen($fileSpriteConf, 'w')) {
+                    throw new DirectoryException('Cannot open file'.$file, 1);
+                }
+                $filesystem->chmod($handle, 0664);
             } catch (DirectoryException $de) {
                 throw new DirectoryException('Sprite file config cannot be create', 1);
             }
@@ -67,7 +70,7 @@ class SpriteService implements SpriteServiceInterface
      * generation du sprite
      * 
      */
-    public function generateSpriteAction() 
+    public function generateSprite() 
     {
         $filesystem = new FileSprite();
 
@@ -76,7 +79,9 @@ class SpriteService implements SpriteServiceInterface
             try {
                 $fileSpriteConf = $spriteInfo['sourceSpriteImage'].'/sprite.conf';
 
-                $handle = $filesystem->fopen($fileSpriteConf, 'w');
+                if (!$handle = fopen($fileSpriteConf, 'w')) {
+                    throw new DirectoryException('Cannot open file'.$file, 1);
+                }
                 fwrite($handle, $this->spriteConf->getFileConf($key));
                 fclose($handle);
             } catch (DirectoryException $de) {
@@ -91,6 +96,39 @@ class SpriteService implements SpriteServiceInterface
                 throw new DirectoryException('Sprite cannot be generate', 1);
             }
         }
-        
+    }
+
+
+    /**
+     * generate only one sprite
+     * 
+     */
+    public function generateOneSprite() 
+    {
+        $filesystem = new FileSprite();
+
+        $listSprite = $this->spriteConf->getConfig();
+        foreach ($listSprite as $key => $spriteInfo) {
+            try {
+                $fileSpriteConf = $spriteInfo['sourceSpriteImage'].'/sprite.conf';
+
+                if (!$handle = fopen($fileSpriteConf, 'w')) {
+                    throw new DirectoryException('Cannot open file'.$file, 1);
+                }
+                fwrite($handle, $this->spriteConf->getFileConf($key));
+                fclose($handle);
+            } catch (DirectoryException $de) {
+                throw new DirectoryException('Cannot write in sprite.conf', 1);
+            }
+            
+            // génération du sprite
+            try {
+                system('glue '.$spriteInfo['sourceSpriteImage'].' '.$spriteInfo['outputSpriteImage'], $retval);
+                //$filesystem->mirror($spriteInfo['outputSpriteImage'], $dirGlobal.'/web/bundles/'.strtolower($this->getRequest()->query->get('site')).$dirAsset.'/sprites');    }
+            } catch (SpriteException $de) {
+                throw new DirectoryException('Sprite cannot be generate', 1);
+            }
+        }
+    }
 
 }

@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sphax\SpriteBundle\Form\SpriteType;
 use Sphax\SpriteBundle\Form\ConfType;
-use Sphax\SpriteBundle\FileSprite\FileSprite;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOException;
 
 /**
@@ -24,8 +24,8 @@ class DefaultController extends Controller
     {
         $sprite = $this->container->get('sphax.sprite');
         $listSprite = $sprite->listSprite();
-        $sprite->createSprite();
-        $sprite->generateSpriteAction();
+        //$sprite->createSprite();
+        //$sprite->generateSpriteAction();
         
         return array('listSprite' => $listSprite);
     }
@@ -231,7 +231,9 @@ class DefaultController extends Controller
         $dirAsset = strtolower(substr($this->getRequest()->query->get('bundle'), 0,-6));
         $fileSpriteConf = $dir.'/sprite.conf';
 
-        $handle = $filesystem->fopen($fileSpriteConf, 'w');
+        if (!$handle = fopen($fileSpriteConf, 'w')) {
+                    throw new DirectoryException('Cannot open file'.$file, 1);
+                }
         fwrite($handle, $spriteConf->getFileConf());
         fclose($handle);
 

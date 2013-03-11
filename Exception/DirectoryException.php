@@ -14,7 +14,7 @@ class DirectoryException extends Exception
 
     // Représentation de l'objet sous forme de chaine personnalisée
     public function __toString() {
-        return __CLASS__ . ": [{$this->code}]: {$this->message}\n";
+        return __CLASS__ . ": [{$this->code}]: {$this->message} in {$this->file} line {$this->line}\n";
     }
 
     public function customFunction() {
