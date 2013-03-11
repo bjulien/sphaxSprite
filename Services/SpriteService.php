@@ -70,7 +70,7 @@ class SpriteService implements SpriteServiceInterface
      * Create one sprite
      * 
      */
-    public function createOneSprite()
+    public function createOneSprite($spriteName)
     {
         $filesystem = new Filesystem();
         $listSprite = $this->spriteConf->getConfig();
