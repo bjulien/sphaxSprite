@@ -24,6 +24,18 @@ interface SpriteServiceInterface
      * generation du sprite
      * 
      */
+    public function createOneSprite($spriteName);
+
+    /**
+     * generation du sprite
+     * 
+     */
     public function generateSprite();
+
+    /**
+     * generation du sprite
+     * 
+     */
+    public function generateOneSprite($spriteName);
 
 }
