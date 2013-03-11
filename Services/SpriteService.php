@@ -67,6 +67,39 @@ class SpriteService implements SpriteServiceInterface
     }
 
     /**
+     * Create one sprite
+     * 
+     */
+    public function createOneSprite()
+    {
+        $filesystem = new Filesystem();
+        $listSprite = $this->spriteConf->getConfig();
+        foreach ($listSprite as $key => $spriteInfo) {
+            if ($key === $spriteName) {
+                try {
+                    if ($filesystem->exists($spriteInfo['sourceSpriteImage']) === false) {
+                        $filesystem->mkdir($spriteInfo['sourceSpriteImage']);
+                    }   
+                } catch (DirectoryException $de) {
+                    throw new DirectoryException('Cannot create directory', 1);
+                }
+
+                //create sprite config
+                try {
+                    $fileSpriteConf = $spriteInfo['sourceSpriteImage'].'sprite.conf';  
+                    if (!$handle = fopen($fileSpriteConf, 'w')) {
+                        throw new DirectoryException('Cannot open file'.$file, 1);
+                    }
+                    $filesystem->chmod($fileSpriteConf, 0664);
+                } catch (DirectoryException $de) {
+                    throw new DirectoryException('Sprite file config cannot be create', 1);
+                }
+                return true;
+            }
+        }
+    }
+
+    /**
      * generation du sprite
      * 
      */
@@ -103,30 +136,34 @@ class SpriteService implements SpriteServiceInterface
      * generate only one sprite
      * 
      */
-    public function generateOneSprite() 
+    public function generateOneSprite($spriteName) 
     {
         $filesystem = new Filesystem();
 
         $listSprite = $this->spriteConf->getConfig();
-        foreach ($listSprite as $key => $spriteInfo) {
-            try {
-                $fileSpriteConf = $spriteInfo['sourceSpriteImage'].'/sprite.conf';
 
-                if (!$handle = fopen($fileSpriteConf, 'w')) {
-                    throw new DirectoryException('Cannot open file'.$file, 1);
+        foreach ($listSprite as $key => $spriteInfo) {
+            if ($key === $spriteName) {
+                try {
+                    $fileSpriteConf = $spriteInfo['sourceSpriteImage'].'/sprite.conf';
+
+                    if (!$handle = fopen($fileSpriteConf, 'w')) {
+                        throw new DirectoryException('Cannot open file'.$file, 1);
+                    }
+                    fwrite($handle, $this->spriteConf->getFileConf($key));
+                    fclose($handle);
+                } catch (DirectoryException $de) {
+                    throw new DirectoryException('Cannot write in sprite.conf', 1);
                 }
-                fwrite($handle, $this->spriteConf->getFileConf($key));
-                fclose($handle);
-            } catch (DirectoryException $de) {
-                throw new DirectoryException('Cannot write in sprite.conf', 1);
-            }
-            
-            // génération du sprite
-            try {
-                system('glue '.$spriteInfo['sourceSpriteImage'].' '.$spriteInfo['outputSpriteImage'], $retval);
-                //$filesystem->mirror($spriteInfo['outputSpriteImage'], $dirGlobal.'/web/bundles/'.strtolower($this->getRequest()->query->get('site')).$dirAsset.'/sprites');    }
-            } catch (SpriteException $de) {
-                throw new DirectoryException('Sprite cannot be generate', 1);
+                
+                // génération du sprite
+                try {
+                    system('glue '.$spriteInfo['sourceSpriteImage'].' '.$spriteInfo['outputSpriteImage'], $retval);
+                    //$filesystem->mirror($spriteInfo['outputSpriteImage'], $dirGlobal.'/web/bundles/'.strtolower($this->getRequest()->query->get('site')).$dirAsset.'/sprites');    }
+                } catch (SpriteException $de) {
+                    throw new DirectoryException('Sprite cannot be generate', 1);
+                }
+                return true;
             }
         }
     }

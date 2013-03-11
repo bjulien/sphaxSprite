@@ -15,18 +15,31 @@ class GenerateSpriteCommand extends ContainerAwareCommand
         $this
             ->setName('sprite:generate')
             ->setDescription('Generate sprite')
+            ->addArgument('oneOrAll',InputArgument::OPTIONAL,'You can specifie a name or generate all sprite. Default will generate all sprite ?')
             ;
     }
  
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('<info>Starting generate sprite process</info>');
-        $sprite = $this->getContainer()->get('sphax.sprite');
-        $output->writeln('<info>Step 1 : create folder and sprite file configuration</info>');
-        $sprite->createSprite();
-        $output->writeln('<comment>Step 1 : done</comment>');
-        $output->writeln('<info>Step 2 : generate sprite</info>');
-        $sprite->generateSprite();
-        $output->writeln('<comment>Step 2 : done</comment>');
+        $oneOrAll = $input->getArgument('oneOrAll');
+        if ($oneOrAll) {
+            $output->writeln('<info>Starting generate sprite '.$oneOrAll.'</info>');
+            $sprite = $this->getContainer()->get('sphax.sprite');
+            $output->writeln('<info>Step 1 : create folder and sprite file configuration</info>');
+            $sprite->createOneSprite();
+            $output->writeln('<comment>Step 1 : done</comment>');
+            $output->writeln('<info>Step 2 : generate sprite</info>');
+            $sprite->generateOneSprite();
+            $output->writeln('<comment>Step 2 : done</comment>');
+        } else {
+            $output->writeln('<info>Starting generate sprite process</info>');
+            $sprite = $this->getContainer()->get('sphax.sprite');
+            $output->writeln('<info>Step 1 : create folder and sprite file configuration</info>');
+            $sprite->createSprite();
+            $output->writeln('<comment>Step 1 : done</comment>');
+            $output->writeln('<info>Step 2 : generate sprite</info>');
+            $sprite->generateSprite();
+            $output->writeln('<comment>Step 2 : done</comment>');
+        }
     }
 }
