@@ -21,6 +21,12 @@ interface SpriteServiceInterface
     public function createSprite();
 
     /**
+     * Create one sprite
+     * 
+     */
+    public function createOneSprite();
+
+    /**
      * generation du sprite
      * 
      */
