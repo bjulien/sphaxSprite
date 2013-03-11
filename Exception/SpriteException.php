@@ -21,4 +21,3 @@ class SpriteException extends Exception
         echo "Une méthode personnalisée pour cette exception\n";
     }
 }
-?>
