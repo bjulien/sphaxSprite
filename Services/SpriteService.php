@@ -4,6 +4,8 @@ namespace Sphax\SpriteBundle\Services;
 
 use Sphax\SpriteBundle\FileSprite\FileSprite;
 use Sphax\SpriteBundle\SpriteConf\SpriteConf;
+use Sphax\SpriteBundle\Exception\DirectoryException;
+use Sphax\SpriteBundle\Exception\SpriteException;
 use Symfony\Component\Filesystem\Exception\IOException;
 
 
@@ -43,16 +45,21 @@ class SpriteService implements SpriteServiceInterface
         $filesystem = new FileSprite();
         $listSprite = $this->spriteConf->getConfig();
         foreach ($listSprite as $key => $spriteInfo) {
-            /*if ($key === $spriteName && $spriteInfo->getBundle() === $dirBundle && $spriteInfo->getDossierImage() === $dirDossierImage) {
-                throw new Exception('Sprite already exist with the same informations', 1);
-            }*/
-            if ($filesystem->exists($spriteInfo['sourceSpriteImage']) === false) {
-                $filesystem->mkdir($spriteInfo['sourceSpriteImage']);
+            try {
+                if ($filesystem->exists($spriteInfo['sourceSpriteImage']) === false) {
+                    $filesystem->mkdir($spriteInfo['sourceSpriteImage']);
+                }   
+            } catch (DirectoryException $de) {
+                throw new DirectoryException('Cannot create directory', 1);
             }
 
             //create sprite config
-            $fileSpriteConf = $spriteInfo['sourceSpriteImage'].'sprite.conf';
-            $handle = $filesystem->fopen($fileSpriteConf, 'w');
+            try {
+                $fileSpriteConf = $spriteInfo['sourceSpriteImage'].'sprite.conf';  
+                $handle = $filesystem->fopen($fileSpriteConf, 'w');
+            } catch (DirectoryException $de) {
+                throw new DirectoryException('Sprite file config cannot be create', 1);
+            }
         }
     }
 
@@ -66,16 +73,24 @@ class SpriteService implements SpriteServiceInterface
 
         $listSprite = $this->spriteConf->getConfig();
         foreach ($listSprite as $key => $spriteInfo) {
-            $fileSpriteConf = $spriteInfo['sourceSpriteImage'].'/sprite.conf';
+            try {
+                $fileSpriteConf = $spriteInfo['sourceSpriteImage'].'/sprite.conf';
 
-            $handle = $filesystem->fopen($fileSpriteConf, 'w');
-            fwrite($handle, $this->spriteConf->getFileConf($key));
-            fclose($handle);
-
+                $handle = $filesystem->fopen($fileSpriteConf, 'w');
+                fwrite($handle, $this->spriteConf->getFileConf($key));
+                fclose($handle);
+            } catch (DirectoryException $de) {
+                throw new DirectoryException('Cannot write in sprite.conf', 1);
+            }
+            
             // génération du sprite
-            system('glue '.$spriteInfo['sourceSpriteImage'].' '.$spriteInfo['outputSpriteImage'], $retval);
+            try {
+                system('glue '.$spriteInfo['sourceSpriteImage'].' '.$spriteInfo['outputSpriteImage'], $retval);
+                //$filesystem->mirror($spriteInfo['outputSpriteImage'], $dirGlobal.'/web/bundles/'.strtolower($this->getRequest()->query->get('site')).$dirAsset.'/sprites');    }
+            } catch (SpriteException $de) {
+                throw new DirectoryException('Sprite cannot be generate', 1);
+            }
         }
-        //$filesystem->mirror($spriteInfo['outputSpriteImage'], $dirGlobal.'/web/bundles/'.strtolower($this->getRequest()->query->get('site')).$dirAsset.'/sprites');
-    }
+        
 
 }
