@@ -10,6 +10,7 @@ use Sphax\SpriteBundle\Form\SpriteType;
 use Sphax\SpriteBundle\Form\ConfType;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOException;
+use Sphax\SpriteBundle\Exception\DirectoryException;
 
 /**
  * @Route("/sprite")
