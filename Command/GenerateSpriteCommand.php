@@ -22,19 +22,16 @@ class GenerateSpriteCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $oneOrAll = $input->getArgument('oneOrAll');
-        if ($oneOrAll) {
-            $name = $oneOrAll;
-        } else {
-            $name = null;
-        }
-
-        $output->writeln('<info>Starting generate sprite process</info>');
-        $sprite = $this->getContainer()->get('sphax.sprite');
-        $output->writeln('<info>Step 1 : create folder and sprite file configuration</info>');
-        $sprite->createSprite($name);
-        $output->writeln('<comment>Step 1 : done</comment>');
-        $output->writeln('<info>Step 2 : generate sprite</info>');
-        $sprite->generateSprite($name);
-        $output->writeln('<comment>Step 2 : done</comment>');
+         if ($oneOrAll) {
+            $output->writeln('<info>Starting generate sprite '.$oneOrAll.'</info>');
+            $sprite = $this->getContainer()->get('sphax.sprite');
+            $sprite->createOneSprite($oneOrAll);
+            $sprite->generateOneSprite($oneOrAll);
+         } else {
+            $output->writeln('<info>Starting generate sprite process</info>');
+            $sprite = $this->getContainer()->get('sphax.sprite');
+            $sprite->createSprite();
+            $sprite->generateSprite();
+         }
     }
 }
