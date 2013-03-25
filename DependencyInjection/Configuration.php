@@ -34,6 +34,7 @@ class Configuration implements ConfigurationInterface
                     ->useAttributeAsKey('name')
                     ->prototype('array')
                         ->children()
+                            ->scalarNode('nameBin')->end()
                             ->scalarNode('outputCSS')->end()
                             ->scalarNode('sourceSpriteImage')->end()
                             ->scalarNode('outputSpriteImage')->end()
