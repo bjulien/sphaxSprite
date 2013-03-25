@@ -105,6 +105,7 @@ class Configuration implements ConfigurationInterface
                                     ->scalarNode('global-template')->end()
                                     ->scalarNode('each-template')->end()
                                     ->scalarNode('optipngpath')->end()
+                                    ->scalarNode('separator')->end()
                                 ->end()
                             ->end()
                         ->end()
