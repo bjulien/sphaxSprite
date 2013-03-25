@@ -116,39 +116,39 @@ class SpriteService implements SpriteServiceInterface
         $retval = null;
         return system(
             '' . $spriteInfo['nameBin'] . ' ' .
-                ($spriteInfo['crop'] ? ' --crop ' : '') .
-                ($spriteInfo['less'] ? ' --less ' : '') .
-                ($spriteInfo['url'] ? ' --url=' . $spriteInfo['url'] : '') .
-                ($spriteInfo['quiet'] ? ' --q ' : '') .
-                ($spriteInfo['padding'] ? ' --padding=' . $spriteInfo['padding'] : '') .
-                ($spriteInfo['ratios'] ? ' --ratios= ' . $spriteInfo['ratios'] : '') .
-                ($spriteInfo['retina'] ? ' --retina ' : '') .
-                ($spriteInfo['imagemagick'] ? ' --imagemagick ' : '') .
-                ($spriteInfo['imagemagickpath'] ? ' --imagemagick --imagemagickpath=' . $spriteInfo['imagemagickpath'] : '') .
-                ($spriteInfo['watch'] ? ' --watch ' : '') .
-                ($spriteInfo['css'] ? ' --css=' . $spriteInfo['css'] : '') .
-                ($spriteInfo['img'] ? ' --img=' . $spriteInfo['css'] : '') .
-                ($spriteInfo['html'] ? ' --html ' : '') .
-                ($spriteInfo['algorithm'] ? ' --algorithm=' . $spriteInfo['algorithm'] : '') .
-                ($spriteInfo['ordering'] ? ' --ordering=' . $spriteInfo['ordering'] : '') .
-                ($spriteInfo['margin'] ? ' --margin=' . $spriteInfo['margin'] : '') .
-                ($spriteInfo['namespace'] ? ' --namespace=' . $spriteInfo['namespace'] : '') .
-                ($spriteInfo['sprite-namespace'] ? ' --sprite-namespace=' . $spriteInfo['sprite-namespace'] : '') .
-                ($spriteInfo['separator'] ? ' --separator=' . $spriteInfo['separator'] : '') .
-                ($spriteInfo['global-template'] ? ' --global-template=' . $spriteInfo['global-template'] : '') .
-                ($spriteInfo['each-template'] ? ' --each-template=' . $spriteInfo['each-template'] : '') .
-                ($spriteInfo['margin'] ? ' --margin=' . $spriteInfo['margin'] : '') .
-                ($spriteInfo['png8'] ? ' --png8 ' : '') .
-                ($spriteInfo['ignore-filename-paddings'] ? ' --ignore-filename-paddings ' : '') .
-                ($spriteInfo['debug'] ? ' --debug ' : '') .
-                ($spriteInfo['optipng'] ? ' --optipng ' : '') .
-                ($spriteInfo['cachebuster'] ? ' --cachebuster ' : '') .
-                ($spriteInfo['follow-links'] ? ' --follow-links ' : '') .
-                ($spriteInfo['force'] ? ' --force ' : '') .
-                ($spriteInfo['no-img'] ? ' --no-img ' : '') .
-                ($spriteInfo['no-css'] ? ' --no-css ' : '') .
-                ($spriteInfo['cachebuster-filename'] ? ' --cachebuster-filename ' : '') .
-                ($spriteInfo['optipngpath'] ? ' --optipng --optipngpath=' . $spriteInfo['optipngpath'] : '') .
+                ($spriteInfo['options']['crop'] != false ? ' --crop ' : '') .
+                ($spriteInfo['options']['less'] != false ? ' --less ' : '') .
+                (!empty($spriteInfo['options']['url']) ? ' --url=' . $spriteInfo['options']['url'] : '') .
+                ($spriteInfo['options']['quiet'] != false ? ' --q ' : '') .
+                (!empty($spriteInfo['options']['padding']) ? ' --padding=' . $spriteInfo['options']['padding'] : '') .
+                (!empty($spriteInfo['options']['ratios']) ? ' --ratios= ' . $spriteInfo['options']['ratios'] : '') .
+                ($spriteInfo['options']['retina'] != false ? ' --retina ' : '') .
+                ($spriteInfo['options']['imagemagick'] != false ? ' --imagemagick ' : '') .
+                (!empty($spriteInfo['options']['imagemagickpath']) ? ' --imagemagick --imagemagickpath=' . $spriteInfo['options']['imagemagickpath'] : '') .
+                ($spriteInfo['options']['watch'] != false ? ' --watch ' : '') .
+                (!empty($spriteInfo['options']['css']) ? ' --css=' . $spriteInfo['options']['css'] : '') .
+                (!empty($spriteInfo['options']['img']) ? ' --img=' . $spriteInfo['options']['img'] : '') .
+                ($spriteInfo['options']['html'] != false ? ' --html ' : '') .
+                (!empty($spriteInfo['options']['algorithm']) ? ' --algorithm=' . $spriteInfo['options']['algorithm'] : '') .
+                (!empty($spriteInfo['options']['ordering']) ? ' --ordering=' . $spriteInfo['options']['ordering'] : '') .
+                (!empty($spriteInfo['options']['margin']) ? ' --margin=' . $spriteInfo['options']['margin'] : '') .
+                (!empty($spriteInfo['options']['namespace']) ? ' --namespace=' . $spriteInfo['options']['namespace'] : '') .
+                (!empty($spriteInfo['options']['sprite-namespace']) ? ' --sprite-namespace=' . $spriteInfo['options']['sprite-namespace'] : '') .
+                (!empty($spriteInfo['options']['separator']) ? ' --separator=' . $spriteInfo['options']['separator'] : '') .
+                (!empty($spriteInfo['options']['global-template']) ? ' --global-template=' . $spriteInfo['options']['global-template'] : '') .
+                (!empty($spriteInfo['options']['each-template']) ? ' --each-template=' . $spriteInfo['options']['each-template'] : '') .
+                (!empty($spriteInfo['options']['margin']) ? ' --margin=' . $spriteInfo['options']['margin'] : '') .
+                ($spriteInfo['options']['png8'] != false ? ' --png8 ' : '') .
+                (!empty($spriteInfo['options']['ignore-filename-paddings']) ? ' --ignore-filename-paddings ' : '') .
+                ($spriteInfo['options']['debug'] != false ? ' --debug ' : '') .
+                ($spriteInfo['options']['optipng'] != false ? ' --optipng ' : '') .
+                ($spriteInfo['options']['cachebuster'] != false ? ' --cachebuster ' : '') .
+                ($spriteInfo['options']['follow-links'] != false ? ' --follow-links ' : '') .
+                ($spriteInfo['force'] != false ? ' --force ' : '') .
+                ($spriteInfo['options']['no-img'] != false ? ' --no-img ' : '') .
+                ($spriteInfo['options']['no-css'] != false ? ' --no-css ' : '') .
+                ($spriteInfo['options']['cachebuster-filename'] != false ? ' --cachebuster-filename ' : '') .
+                (!empty($spriteInfo['options']['optipngpath']) ? ' --optipng --optipngpath=' . $spriteInfo['options']['optipngpath'] : '') .
                 $spriteInfo['sourceSpriteImage'] . ' ' .
                 $spriteInfo['outputSpriteImage'],
             $retval
