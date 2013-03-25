@@ -29,7 +29,6 @@ class Configuration implements ConfigurationInterface
                             ->scalarNode('nameBin')
                                 ->defaultValue('glue')
                                 ->end()
-                            //->scalarNode('outputCSS')->end()
                             ->scalarNode('sourceSpriteImage')
                                 ->isRequired()
                                 ->end()
