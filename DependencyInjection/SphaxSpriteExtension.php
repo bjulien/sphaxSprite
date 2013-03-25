@@ -22,12 +22,10 @@ class SphaxSpriteExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $definition = new Definition('Sphax\SpriteBundle\Twig\Extension\ImageOperation');
-
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        $spriteDef = $container->getDefinition('sphax.sprite_conf');
+        $spriteDef = $container->getDefinition('sphax.sprite');
         if (!empty($config['sprite'])) {
             foreach ($config['sprite'] as $name => $sprite) {
                 $spriteDef->addMethodCall('setConfig', array($config['sprite']));

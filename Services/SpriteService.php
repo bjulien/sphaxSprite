@@ -21,90 +21,41 @@ class SpriteService implements SpriteServiceInterface
      * @var SpriteConfInterface
      */
     protected $spriteConf;
+    private $config;
 
-    public function __construct(SpriteConf $spriteConf)
+
+    /*
+     * set config for command line
+     */
+    public function setConfig($config)
     {
-        $this->spriteConf = $spriteConf;
+        $this->config = $config;
+    }
+
+    /*
+     * get config for command line
+     */
+    public function getConfig()
+    {
+        return $this->config;
     }
 
     /**
-     * liste des sprites
+     * Sprite List
      * 
      */
     public function getSpriteList()
     {
-        $spriteList = $this->spriteConf->getConfig();
+        $spriteList = $this->getConfig();
         if (empty($spriteList)) {
             throw new SpriteException('No sprite configuration found.');
         }
         return $spriteList;
     }
 
-	/**
-     * Création du sprite
-     * 
-     */
-    public function createSprite()
-    {
-        $filesystem = new Filesystem();
-        $spriteList = $this->getSpriteList();
-        foreach ($spriteList as $key => $spriteInfo) {
-            try {
-                if ($filesystem->exists($spriteInfo['sourceSpriteImage']) === false) {
-                    $filesystem->mkdir($spriteInfo['sourceSpriteImage']);
-                }   
-            } catch (DirectoryException $de) {
-                throw new DirectoryException('Cannot create directory');
-            }
-
-            //create sprite config
-            try {
-                $fileSpriteConf = $spriteInfo['sourceSpriteImage'] . 'sprite.conf';  
-                if (!$handle = fopen($fileSpriteConf, 'w')) {
-                    throw new DirectoryException('Cannot open file' . $file);
-                }
-                $filesystem->chmod($fileSpriteConf, 0664);
-            } catch (DirectoryException $de) {
-                throw new DirectoryException('Sprite file config cannot be create');
-            }
-        }
-    }
 
     /**
-     * Create one sprite
-     * 
-     */
-    public function createOneSprite($spriteName)
-    {
-        $filesystem = new Filesystem();
-        $spriteList = $this->getSpriteList();
-        foreach ($spriteList as $key => $spriteInfo) {
-            if ($key === $spriteName) {
-                try {
-                    if ($filesystem->exists($spriteInfo['sourceSpriteImage']) === false) {
-                        $filesystem->mkdir($spriteInfo['sourceSpriteImage']);
-                    }   
-                } catch (DirectoryException $de) {
-                    throw new DirectoryException('Cannot create directory');
-                }
-
-                //create sprite config
-                try {
-                    $fileSpriteConf = $spriteInfo['sourceSpriteImage'].'sprite.conf';  
-                    if (!$handle = fopen($fileSpriteConf, 'w')) {
-                        throw new DirectoryException('Cannot open file' . $file);
-                    }
-                    $filesystem->chmod($fileSpriteConf, 0664);
-                } catch (DirectoryException $de) {
-                    throw new DirectoryException('Sprite file config cannot be create');
-                }
-                return true;
-            }
-        }
-    }
-
-    /**
-     * generation du sprite
+     * generate sprite
      * 
      */
     public function generateSprite() 
@@ -113,16 +64,8 @@ class SpriteService implements SpriteServiceInterface
 
         $spriteList = $this->getSpriteList();
         foreach ($spriteList as $key => $spriteInfo) {
-            try {
-                $fileSpriteConf = $spriteInfo['sourceSpriteImage'].'/sprite.conf';
-
-                if (!$handle = fopen($fileSpriteConf, 'w')) {
-                    throw new DirectoryException('Cannot open file'.$file);
-                }
-                fwrite($handle, $this->spriteConf->getFileConf($key));
-                fclose($handle);
-            } catch (DirectoryException $de) {
-                throw new DirectoryException('Cannot write in sprite.conf');
+            if ($filesystem->exists($spriteInfo['sourceSpriteImage']) === false) {
+                throw new DirectoryException('Directory doesn\'t exist');
             }
             
             // génération du sprite
@@ -146,16 +89,8 @@ class SpriteService implements SpriteServiceInterface
         $spriteList = $this->getSpriteList();
         foreach ($spriteList as $key => $spriteInfo) {
             if ($key === $spriteName) {
-                try {
-                    $fileSpriteConf = $spriteInfo['sourceSpriteImage'].'/sprite.conf';
-
-                    if (!$handle = fopen($fileSpriteConf, 'w')) {
-                        throw new DirectoryException('Cannot open file'.$file);
-                    }
-                    fwrite($handle, $this->spriteConf->getFileConf($key));
-                    fclose($handle);
-                } catch (DirectoryException $de) {
-                    throw new DirectoryException('Cannot write in sprite.conf');
+                if ($filesystem->exists($spriteInfo['sourceSpriteImage']) === false) {
+                    throw new DirectoryException('Directory doesn\'t exist');
                 }
                 
                 // génération du sprite
@@ -181,7 +116,39 @@ class SpriteService implements SpriteServiceInterface
         $retval = null;
         return system(
             '' . $spriteInfo['nameBin'] . ' ' .
+                ($spriteInfo['crop'] ? ' --crop ' : '') .
+                ($spriteInfo['less'] ? ' --less ' : '') .
+                ($spriteInfo['url'] ? ' --url=' . $spriteInfo['url'] : '') .
+                ($spriteInfo['quiet'] ? ' --q ' : '') .
+                ($spriteInfo['padding'] ? ' --padding=' . $spriteInfo['padding'] : '') .
+                ($spriteInfo['ratios'] ? ' --ratios= ' . $spriteInfo['ratios'] : '') .
+                ($spriteInfo['retina'] ? ' --retina ' : '') .
+                ($spriteInfo['imagemagick'] ? ' --imagemagick ' : '') .
+                ($spriteInfo['imagemagickpath'] ? ' --imagemagick --imagemagickpath=' . $spriteInfo['imagemagickpath'] : '') .
+                ($spriteInfo['watch'] ? ' --watch ' : '') .
+                ($spriteInfo['css'] ? ' --css=' . $spriteInfo['css'] : '') .
+                ($spriteInfo['img'] ? ' --img=' . $spriteInfo['css'] : '') .
+                ($spriteInfo['html'] ? ' --html ' : '') .
+                ($spriteInfo['algorithm'] ? ' --algorithm=' . $spriteInfo['algorithm'] : '') .
+                ($spriteInfo['ordering'] ? ' --ordering=' . $spriteInfo['ordering'] : '') .
+                ($spriteInfo['margin'] ? ' --margin=' . $spriteInfo['margin'] : '') .
+                ($spriteInfo['namespace'] ? ' --namespace=' . $spriteInfo['namespace'] : '') .
+                ($spriteInfo['sprite-namespace'] ? ' --sprite-namespace=' . $spriteInfo['sprite-namespace'] : '') .
+                ($spriteInfo['separator'] ? ' --separator=' . $spriteInfo['separator'] : '') .
+                ($spriteInfo['global-template'] ? ' --global-template=' . $spriteInfo['global-template'] : '') .
+                ($spriteInfo['each-template'] ? ' --each-template=' . $spriteInfo['each-template'] : '') .
+                ($spriteInfo['margin'] ? ' --margin=' . $spriteInfo['margin'] : '') .
+                ($spriteInfo['png8'] ? ' --png8 ' : '') .
+                ($spriteInfo['ignore-filename-paddings'] ? ' --ignore-filename-paddings ' : '') .
+                ($spriteInfo['debug'] ? ' --debug ' : '') .
+                ($spriteInfo['optipng'] ? ' --optipng ' : '') .
+                ($spriteInfo['cachebuster'] ? ' --cachebuster ' : '') .
+                ($spriteInfo['follow-links'] ? ' --follow-links ' : '') .
                 ($spriteInfo['force'] ? ' --force ' : '') .
+                ($spriteInfo['no-img'] ? ' --no-img ' : '') .
+                ($spriteInfo['no-css'] ? ' --no-css ' : '') .
+                ($spriteInfo['cachebuster-filename'] ? ' --cachebuster-filename ' : '') .
+                ($spriteInfo['optipngpath'] ? ' --optipng --optipngpath=' . $spriteInfo['optipngpath'] : '') .
                 $spriteInfo['sourceSpriteImage'] . ' ' .
                 $spriteInfo['outputSpriteImage'],
             $retval

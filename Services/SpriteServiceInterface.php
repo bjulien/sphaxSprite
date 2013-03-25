@@ -14,17 +14,6 @@ interface SpriteServiceInterface
      */
     public function getSpriteList();
 
-    /**
-     * Création du sprite
-     * 
-     */
-    public function createSprite();
-
-    /**
-     * generation du sprite
-     * 
-     */
-    public function createOneSprite($spriteName);
 
     /**
      * generation du sprite
