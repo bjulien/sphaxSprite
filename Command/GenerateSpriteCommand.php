@@ -45,12 +45,10 @@ class GenerateSpriteCommand extends ContainerAwareCommand
              if (!empty($name)) {
                 $output->writeln('<info>Starting generate sprite ' . $name . '</info>');
                 $sprite = $this->getContainer()->get('sphax.sprite');
-                $sprite->createOneSprite($name);
                 $sprite->generateOneSprite($name);
              } else {
                 $output->writeln('<info>Starting generate sprite process</info>');
                 $sprite = $this->getContainer()->get('sphax.sprite');
-                $sprite->createSprite();
                 $sprite->generateSprite();
              }
          } catch (SpriteException $e) {
