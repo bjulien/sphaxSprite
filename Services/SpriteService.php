@@ -123,8 +123,7 @@ class SpriteService implements SpriteServiceInterface
             
             // génération du sprite
             try {
-                system('glue '.$spriteInfo['sourceSpriteImage'].' '.$spriteInfo['outputSpriteImage'], $retval);
-                //$filesystem->mirror($spriteInfo['outputSpriteImage'], $dirGlobal.'/web/bundles/'.strtolower($this->getRequest()->query->get('site')).$dirAsset.'/sprites');    }
+                system(''.$spriteInfo['nameBin'].' '.$spriteInfo['sourceSpriteImage'].' '.$spriteInfo['outputSpriteImage'], $retval);
             } catch (SpriteException $de) {
                 throw new DirectoryException('Sprite cannot be generate', 1);
             }
@@ -158,8 +157,7 @@ class SpriteService implements SpriteServiceInterface
                 
                 // génération du sprite
                 try {
-                    system('glue '.$spriteInfo['sourceSpriteImage'].' '.$spriteInfo['outputSpriteImage'], $retval);
-                    //$filesystem->mirror($spriteInfo['outputSpriteImage'], $dirGlobal.'/web/bundles/'.strtolower($this->getRequest()->query->get('site')).$dirAsset.'/sprites');    }
+                    system(''.$spriteInfo['nameBin'].' '.$spriteInfo['sourceSpriteImage'].' '.$spriteInfo['outputSpriteImage'], $retval);
                 } catch (SpriteException $de) {
                     throw new DirectoryException('Sprite cannot be generate', 1);
                 }
