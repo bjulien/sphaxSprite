@@ -6,32 +6,55 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Sphax\SpriteBundle\Exception\SpriteException;
 
 class GenerateSpriteCommand extends ContainerAwareCommand
 {
+    /**
+     * configure
+     *
+     * @access protected
+     * @return void
+     */
     protected function configure()
     {
  
         $this
-            ->setName('sprite:generate')
+            ->setName('sphax:sprite:generate')
             ->setDescription('Generate sprite')
-            ->addArgument('oneOrAll',InputArgument::OPTIONAL,'You can specifie a name or generate all sprite. Default will generate all sprite ?')
-            ;
+            ->addArgument(
+                'name',
+                InputArgument::OPTIONAL,
+                'You can specifie the name of one of your sprites. ' .
+                    'If not set, all the sprites are generated.'
+            );
     }
  
+    /**
+     * execute
+     *
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @access protected
+     * @return void
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $oneOrAll = $input->getArgument('oneOrAll');
-         if ($oneOrAll) {
-            $output->writeln('<info>Starting generate sprite '.$oneOrAll.'</info>');
-            $sprite = $this->getContainer()->get('sphax.sprite');
-            $sprite->createOneSprite($oneOrAll);
-            $sprite->generateOneSprite($oneOrAll);
-         } else {
-            $output->writeln('<info>Starting generate sprite process</info>');
-            $sprite = $this->getContainer()->get('sphax.sprite');
-            $sprite->createSprite();
-            $sprite->generateSprite();
+        try {
+            $name = $input->getArgument('name');
+             if (!empty($name)) {
+                $output->writeln('<info>Starting generate sprite ' . $name . '</info>');
+                $sprite = $this->getContainer()->get('sphax.sprite');
+                $sprite->createOneSprite($name);
+                $sprite->generateOneSprite($name);
+             } else {
+                $output->writeln('<info>Starting generate sprite process</info>');
+                $sprite = $this->getContainer()->get('sphax.sprite');
+                $sprite->createSprite();
+                $sprite->generateSprite();
+             }
+         } catch (SpriteException $e) {
+             $output->writeln('<error>' . $e->getMessage() . '</error>');
          }
     }
 }

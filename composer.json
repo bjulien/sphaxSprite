@@ -1,5 +1,5 @@
 {
-    "name": "sphax/spritebundle",
+    "name": "sphax/sprite-bundle",
     "description": "Generate sprite with glue",
     "keywords": ["sprite"],
     "type": "library",
@@ -8,6 +8,10 @@
         {
             "name": "Julien BESNARD",
             "email": "jubesnard84@gmail.com"
+        },
+        {
+            "name": "Julien DENIAU",
+            "email": "julien.deniau@gmail.com"
         }
     ],
     "require": {

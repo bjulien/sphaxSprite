@@ -12,7 +12,7 @@ interface SpriteServiceInterface
      * liste des sprites
      * 
      */
-    public function listSprite();
+    public function getSpriteList();
 
     /**
      * Création du sprite
