@@ -77,7 +77,7 @@ class SpriteService implements SpriteServiceInterface
             try {
                 $this->executeBin($spriteInfo);
             } catch (SpriteException $de) {
-                throw new DirectoryException('Sprite cannot be generate');
+                throw new SpriteException('Sprite cannot be generate');
             }
         }
     }
@@ -102,7 +102,7 @@ class SpriteService implements SpriteServiceInterface
                 try {
                     $this->executeBin($spriteInfo);
                 } catch (SpriteException $de) {
-                    throw new DirectoryException('Sprite cannot be generate');
+                    throw new SpriteException('Sprite cannot be generate');
                 }
                 return true;
             }
