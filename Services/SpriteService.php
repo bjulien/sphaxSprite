@@ -56,7 +56,6 @@ class SpriteService implements SpriteServiceInterface
         return $spriteList;
     }
 
-
     /**
      * generate sprite
      * 
