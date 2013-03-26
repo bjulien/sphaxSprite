@@ -66,8 +66,6 @@ class SpriteService implements SpriteServiceInterface
         $filesystem = new Filesystem();
 
         $spriteList = $this->getSpriteList();
-        print_r($spriteList);
-        die();
         foreach ($spriteList as $key => $spriteInfo) {
             if ($filesystem->exists($spriteInfo['sourceSpriteImage']) === false) {
                 throw new DirectoryException('Directory doesn\'t exist');
