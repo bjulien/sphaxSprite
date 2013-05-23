@@ -45,14 +45,16 @@ class SpriteService implements SpriteServiceInterface
     public function getSpriteList()
     {
         $spriteList = $this->getConfig();
-        foreach ($spriteList as $key => $value) {
-            foreach ($value['options'] as $keyOptions => $valueOptions) {
-                str_replace('-', '_', $keyOptions);
-            }
-        }
         if (empty($spriteList)) {
-            throw new SpriteException('No sprite configuration found.');
+            $spriteList = null;
+        } else {
+            foreach ($spriteList as $key => $value) {
+                foreach ($value['options'] as $keyOptions => $valueOptions) {
+                    str_replace('-', '_', $keyOptions);
+                }
+            }   
         }
+        
         return $spriteList;
     }
 
