@@ -71,7 +71,14 @@ class SpriteService implements SpriteServiceInterface
             if ($filesystem->exists($spriteInfo['sourceSpriteImage']) === false) {
                 throw new DirectoryException('Directory doesn\'t exist');
             }
-            
+            if ($filesystem->exists($spriteInfo['outputSpriteImage']) === false) {
+                try {
+                    $filesystem->mkdir($spriteInfo['outputSpriteImage'], 0755);
+                } catch (IOException $e) {
+                    return false;
+                }
+            }
+
             // génération du sprite
             try {
                 $this->executeBin($spriteInfo);
@@ -95,6 +102,13 @@ class SpriteService implements SpriteServiceInterface
             if ($key === $spriteName) {
                 if ($filesystem->exists($spriteInfo['sourceSpriteImage']) === false) {
                     throw new DirectoryException('Directory doesn\'t exist');
+                }
+                if ($filesystem->exists($spriteInfo['outputSpriteImage']) === false) {
+                    try {
+                        $filesystem->mkdir($spriteInfo['outputSpriteImage'], 0755);
+                    } catch (IOException $e) {
+                        return false;
+                    }
                 }
                 
                 // génération du sprite
