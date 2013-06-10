@@ -1,9 +1,9 @@
 <?php
  
-namespace Sphax\SpriteBundle\Services;
+namespace SphaxSprite\Services;
 
-use Sphax\SpriteBundle\Exception\DirectoryException;
-use Sphax\SpriteBundle\Exception\SpriteException;
+use SphaxSprite\Exception\DirectoryException;
+use SphaxSprite\Exception\SpriteException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOException;
 
@@ -20,7 +20,6 @@ class SpriteService implements SpriteServiceInterface
      * @var SpriteConfInterface
      */
     private $config;
-
 
     /*
      * set config for command line
@@ -58,6 +57,7 @@ class SpriteService implements SpriteServiceInterface
         return $spriteList;
     }
 
+
     /**
      * generate sprite
      * 
@@ -78,13 +78,15 @@ class SpriteService implements SpriteServiceInterface
                     return false;
                 }
             }
-
+            
             // génération du sprite
             try {
-                $this->executeBin($spriteInfo);
+                $retval = $this->executeBin($spriteInfo);
             } catch (SpriteException $de) {
                 throw new SpriteException('Sprite cannot be generate');
+                return false;
             }
+            return $retval;
         }
     }
 
@@ -113,11 +115,12 @@ class SpriteService implements SpriteServiceInterface
                 
                 // génération du sprite
                 try {
-                    $this->executeBin($spriteInfo);
+                    $retval = $this->executeBin($spriteInfo);
                 } catch (SpriteException $de) {
                     throw new SpriteException('Sprite cannot be generate');
+                    return false;
                 }
-                return true;
+                return $retval;
             }
         }
     }
@@ -137,7 +140,7 @@ class SpriteService implements SpriteServiceInterface
                 ($spriteInfo['options']['crop'] != false ? ' --crop ' : '') .
                 ($spriteInfo['options']['less'] != false ? ' --less ' : '') .
                 (!empty($spriteInfo['options']['url']) ? ' --url=' . $spriteInfo['options']['url'] : '') .
-                ($spriteInfo['options']['quiet'] != false ? ' --q ' : '') .
+                ($spriteInfo['options']['quiet'] != false ? ' -q ' : '') .
                 (!empty($spriteInfo['options']['padding']) ? ' --padding=' . $spriteInfo['options']['padding'] : '') .
                 (!empty($spriteInfo['options']['ratios']) ? ' --ratios= ' . $spriteInfo['options']['ratios'] : '') .
                 ($spriteInfo['options']['retina'] != false ? ' --retina ' : '') .
@@ -172,5 +175,4 @@ class SpriteService implements SpriteServiceInterface
             $retval
         );
     }
-
 }

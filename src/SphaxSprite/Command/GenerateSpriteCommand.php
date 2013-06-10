@@ -1,12 +1,12 @@
 <?php
-namespace Sphax\SpriteBundle\Command;
+namespace SphaxSprite\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Sphax\SpriteBundle\Exception\SpriteException;
+use SphaxSprite\Exception\SpriteException;
 
 class GenerateSpriteCommand extends ContainerAwareCommand
 {

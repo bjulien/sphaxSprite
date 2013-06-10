@@ -1,5 +1,5 @@
 <?php
-Namespace Sphax\SpriteBundle\Services;
+Namespace SphaxSprite\Services;
 
 /*
 *

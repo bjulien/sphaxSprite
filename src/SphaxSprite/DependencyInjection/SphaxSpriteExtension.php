@@ -1,5 +1,5 @@
 <?php
-namespace Sphax\SpriteBundle\DependencyInjection;
+namespace SphaxSprite\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;

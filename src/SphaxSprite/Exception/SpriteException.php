@@ -1,6 +1,6 @@
 <?php
 
-namespace Sphax\SpriteBundle\Exception;
+namespace SphaxSprite\Exception;
 
 
 /**

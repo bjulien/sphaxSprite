@@ -17,8 +17,10 @@
     "require": {
         "php": ">=5.3.0"
     },
-    "autoload": {   
-        "psr-0": { "Sphax\\SpriteBundle": "" }
+    "require-dev": {
+        "atoum/atoum": "dev-master"
     },
-    "target-dir": "Sphax/SpriteBundle"
+    "autoload": {   
+        "psr-0": { "": "src/" }
+    }
 }
