@@ -47,13 +47,17 @@ class SpriteService implements SpriteServiceInterface
         if (empty($spriteList)) {
             $spriteList = null;
         } else {
+            $arrOptions = array();
             foreach ($spriteList as $key => $value) {
                 foreach ($value['options'] as $keyOptions => $valueOptions) {
-                    str_replace('-', '_', $keyOptions);
+                    if (strpos($keyOptions, '-') !== false) {
+                        $newKey = str_replace('-', '_', $keyOptions);
+                        $spriteList[$key]['options'][$newKey] = $valueOptions;
+                        unset($spriteList[$key]['options'][$keyOptions]);
+                    }
                 }
-            }   
+            }
         }
-        
         return $spriteList;
     }
 
@@ -112,7 +116,7 @@ class SpriteService implements SpriteServiceInterface
                         return false;
                     }
                 }
-                
+
                 // génération du sprite
                 try {
                     $retval = $this->executeBin($spriteInfo);

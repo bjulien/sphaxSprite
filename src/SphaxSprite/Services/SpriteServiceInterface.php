@@ -1,5 +1,6 @@
 <?php
-Namespace SphaxSprite\Services;
+
+namespace SphaxSprite\Services;
 
 /*
 *
