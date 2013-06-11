@@ -1,6 +1,6 @@
 <?php
 
-namespace Sphax\SpriteBundle;
+namespace SphaxSprite\SpriteBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
