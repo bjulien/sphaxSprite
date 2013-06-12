@@ -1,0 +1,6 @@
+parameters:
+    sprite.class: SphaxSprite\Services\SpriteService
+
+services:
+    sphax.sprite:
+        class: %sprite.class%
