@@ -21,7 +21,7 @@
         "atoum/atoum": "dev-master"
     },
     "autoload": {   
-        "psr-0": { "Sphax\\SpriteBundle": "" }
+        "psr-0": { "Sphax\\SphaxSprite": "" }
     },
-    "target-dir": "Sphax/SpriteBundle"
+    "target-dir": "Sphax/SphaxSprite"
 }
