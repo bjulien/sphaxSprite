@@ -1,1 +1,8 @@
-../atoum/atoum/bin/atoum
+#!/usr/bin/env php
+<?php
+
+define('mageekguy\atoum\scripts\runner', __FILE__);
+
+require_once __DIR__ . '/../scripts/runner.php';
+
+?>

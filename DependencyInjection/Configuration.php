@@ -1,6 +1,6 @@
 <?php
 
-namespace SphaxSprite\DependencyInjection;
+namespace Sphax\SphaxSprite\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

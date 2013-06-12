@@ -1,6 +1,6 @@
 <?php
  
-namespace SphaxSprite\Services;
+namespace Sphax\SphaxSprite\Services;
 
 use SphaxSprite\Exception\DirectoryException;
 use SphaxSprite\Exception\SpriteException;
