@@ -1,66 +1,17 @@
 [
     {
-        "name": "symfony/filesystem",
-        "version": "2.2.x-dev",
-        "version_normalized": "2.2.9999999.9999999-dev",
-        "target-dir": "Symfony/Component/Filesystem",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/Filesystem.git",
-            "reference": "v2.2.2"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/Filesystem/zipball/v2.2.2",
-            "reference": "v2.2.2",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "time": "2013-05-06 20:02:13",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.2-dev"
-            }
-        },
-        "installation-source": "source",
-        "autoload": {
-            "psr-0": {
-                "Symfony\\Component\\Filesystem\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "http://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony Filesystem Component",
-        "homepage": "http://symfony.com"
-    },
-    {
         "name": "atoum/atoum",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "source": {
             "type": "git",
             "url": "https://github.com/atoum/atoum.git",
-            "reference": "b12d1a14f5bc8cd74fcaa08621527bccb4d222c3"
+            "reference": "fb5b8ae04a8aeca08b3f261e3cd8b571fb950f32"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/atoum/atoum/zipball/b12d1a14f5bc8cd74fcaa08621527bccb4d222c3",
-            "reference": "b12d1a14f5bc8cd74fcaa08621527bccb4d222c3",
+            "url": "https://api.github.com/repos/atoum/atoum/zipball/fb5b8ae04a8aeca08b3f261e3cd8b571fb950f32",
+            "reference": "fb5b8ae04a8aeca08b3f261e3cd8b571fb950f32",
             "shasum": ""
         },
         "require": {
@@ -77,7 +28,7 @@
         "suggest": {
             "ext-mbstring": "Provides support for UTF-8 strings"
         },
-        "time": "2013-06-10 13:31:48",
+        "time": "2013-06-12 11:11:01",
         "bin": [
             "bin/atoum"
         ],
@@ -123,5 +74,54 @@
             "test",
             "unit testing"
         ]
+    },
+    {
+        "name": "symfony/filesystem",
+        "version": "v2.2.2",
+        "version_normalized": "2.2.2.0",
+        "target-dir": "Symfony/Component/Filesystem",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/Filesystem.git",
+            "reference": "v2.2.2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/Filesystem/zipball/v2.2.2",
+            "reference": "v2.2.2",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "time": "2013-05-06 20:02:13",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.2-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Symfony\\Component\\Filesystem\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "http://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony Filesystem Component",
+        "homepage": "http://symfony.com"
     }
 ]

@@ -1,5 +1,5 @@
 <?php
-namespace Sphax\SphaxSprite\Services\tests\units;
+namespace SphaxSprite\Services\tests\units;
 
 use \atoum;
 

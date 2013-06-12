@@ -7,5 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Symfony\\Component\\Filesystem\\' => array($vendorDir . '/symfony/filesystem'),
-    '' => array($baseDir . '/src'),
+    'SphaxSprite' => array($baseDir . '/src'),
 );

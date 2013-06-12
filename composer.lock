@@ -3,11 +3,11 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "25c51e3440c0c49920582b570bfad4ed",
+    "hash": "2f26b76182f43fc5b89c1a4445a084a0",
     "packages": [
         {
             "name": "symfony/filesystem",
-            "version": "2.2.x-dev",
+            "version": "v2.2.2",
             "target-dir": "Symfony/Component/Filesystem",
             "source": {
                 "type": "git",
@@ -60,12 +60,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/atoum/atoum.git",
-                "reference": "b12d1a14f5bc8cd74fcaa08621527bccb4d222c3"
+                "reference": "fb5b8ae04a8aeca08b3f261e3cd8b571fb950f32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/atoum/atoum/zipball/b12d1a14f5bc8cd74fcaa08621527bccb4d222c3",
-                "reference": "b12d1a14f5bc8cd74fcaa08621527bccb4d222c3",
+                "url": "https://api.github.com/repos/atoum/atoum/zipball/fb5b8ae04a8aeca08b3f261e3cd8b571fb950f32",
+                "reference": "fb5b8ae04a8aeca08b3f261e3cd8b571fb950f32",
                 "shasum": ""
             },
             "require": {
@@ -126,7 +126,7 @@
                 "test",
                 "unit testing"
             ],
-            "time": "2013-06-10 13:31:48"
+            "time": "2013-06-12 11:11:01"
         }
     ],
     "aliases": [
@@ -134,7 +134,6 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "symfony/filesystem": 20,
         "atoum/atoum": 20
     },
     "platform": {

@@ -1,5 +1,5 @@
 parameters:
-    sprite.class: Sphax\SphaxSprite\Services\SpriteService
+    sprite.class: SphaxSprite\Services\SpriteService
 
 services:
     sphax.sprite:
