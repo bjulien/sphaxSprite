@@ -32,7 +32,7 @@ if you installed composer globally.
 
 ### Add the classes to your Kernel
 ```php
-new Sphax\SpriteBundle\SphaxSpriteBundle(),
+new SphaxSprite\SphaxSpriteBundle(),
 ```
 
 ### Configuration
